@@ -1,9 +1,10 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -11,8 +12,9 @@ import javax.swing.SwingConstants;
 public class Panneau extends JPanel implements Observer {
 
 	// public Ticker ticker;
-	JLabel ticLabelLeft = new JLabel("2");
-	JLabel ticLabelRight = new JLabel("2");
+	public static JLabel ticLabelLeft = new JLabel("2");
+	public static JLabel ticLabelRight = new JLabel("2");
+	static JButton reset = new JButton("reset");
 
 	public Panneau() {
 		
@@ -35,6 +37,12 @@ public class Panneau extends JPanel implements Observer {
 		getTicLabelRight().setBackground(blue);
 		this.add(getTicLabelLeft());
 		this.add(getTicLabelRight());
+		
+		reset.setSize(70, 20);
+		reset.setLocation(165, 180);
+		reset.setVisible(true);
+		reset.addActionListener(new ResetButton());
+		this.add(reset, BorderLayout.CENTER);
 
 	}
 
@@ -75,5 +83,9 @@ public class Panneau extends JPanel implements Observer {
 	public void addTicLabelRight() {
 		setTicLabelRight(Integer.parseInt(getTicLabelRight().getText()) + 1);
 	}
-
+	
+	public static void reset(){
+		ticLabelLeft.setText("0");
+		ticLabelRight.setText("0");
+	}
 }
